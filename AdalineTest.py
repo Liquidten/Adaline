@@ -35,20 +35,6 @@ def get_accuracy(actual, predicted):
 
 
 
-def task_four():
-    # Getting features from dataframe
-    columns = list(df_train)
-    # Adding features and corresponding weights to the list
-    weights = []
-    for i in range(1, len(ada.w_)):
-        weights.append(str(round(abs(ada.w_[i]), 2)) + " " + columns[i])
-    # Sorting and printing the features with the highest weight
-    print('The most predictive features are:')
-    print(sorted(weights, reverse=True)[:3])
-    
-
-
-
 dp = Data_Processing.DataProcessing()
 #df = pd.read_csv('train.csv')
 PATH = "../Adaline/titanic_train.csv"
