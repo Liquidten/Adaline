@@ -24,5 +24,6 @@ def graphs(train):
 
 def Heat_map(DF):
     
-    sns.heatmap(DF.corr(), annot = True, fmt = ".2f")
+    fig, ax = plt.subplots(figsize=(10,10)) 
+    sns.heatmap(DF.corr(), annot = True, fmt = ".2f", ax=ax)
     plt.figure('Pearson Correlation of Features')

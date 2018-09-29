@@ -7,12 +7,13 @@ Created on Wed Sep 26 21:41:52 2018
 """
 import pandas as pd
 
+
 class DataProcessing(object):
     
     
     def read_data(path):
         train =pd.read_csv('titanic_train.csv')
-    
+        
         return train
     
   
@@ -34,17 +35,22 @@ class DataProcessing(object):
     
     
     def data_clean(self,train):
+        train.loc[train['Survived'] == 0, 'Survived'] = -1
+        #print(train)
         train['Age'] = train[['Age', 'Pclass']].apply(DataProcessing.imput_age, axis=1)
         train.drop('Cabin', axis=1, inplace=True)
-        train.info()
-        sex = pd.get_dummies(train['Sex'], drop_first=True)
+        #train.info()
+        sex = pd.get_dummies(train['Sex'], drop_first=False)
         embark = pd.get_dummies(train['Embarked'], drop_first=True)
         pclass = pd.get_dummies(train['Pclass'], drop_first=True)
         train = pd.concat([train,sex,embark,pclass], axis=1)
-        train.info()
+        #train.info()
         train.drop(['Sex', 'Embarked', 'Name','Ticket', 'Pclass'], axis =1, inplace=True)
         train.head()
         train.drop('PassengerId', axis = 1, inplace =True)
+        train.rename(columns={"Male": "Sex"})
+        train = train.fillna(0)
         #print(train)
         return train
 
+    
